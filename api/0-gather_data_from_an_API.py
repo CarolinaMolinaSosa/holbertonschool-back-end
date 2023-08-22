@@ -14,16 +14,13 @@ if __name__ == "__main__":
     tasks_data = requests.get(todo_url.format(employee_id)).json()
     task_count = 0
     task_total = 0
-    formatted_tasks = []
+
     for task in tasks_data:
         if task['userId'] == employee_id:
             task_total += 1
         if task['userId'] == employee_id and task['completed'] is True:
             task_count += 1
-            formatted_tasks.append("\t{}".format(task['title']))
+            print("\t{}".format(task['title']))
 
     print("Employee {} is done with tasks({}/{}):".format(
         user_data['name'], task_count, task_total))
-
-    for task_title in formatted_tasks:
-        print(task_title)
