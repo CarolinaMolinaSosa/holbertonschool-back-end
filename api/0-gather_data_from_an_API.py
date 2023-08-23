@@ -20,10 +20,8 @@ if __name__ == "__main__":
             total_task_count += 1
         if task['userId'] == employee_id and task['completed'] is True:
             completed_task_count += 1
-
     print("Employee {} is done with tasks({}/{}):".format(
         user_data['name'], completed_task_count, total_task_count))
-
     for task in tasks_data:
         if task['userId'] == employee_id and task['completed'] is True:
             print("\t{}".format(task['title']))
