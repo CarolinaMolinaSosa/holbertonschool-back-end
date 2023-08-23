@@ -5,21 +5,21 @@ import requests
 import sys
 
 if __name__ == "__main__":
-    user_url = "https://jsonplaceholder.typicode.com/users/{}"
-    todo_url = "https://jsonplaceholder.typicode.com/todos/?userId={}"
+    users = "https://jsonplaceholder.typicode.com/users/{}"
+    todos = "https://jsonplaceholder.typicode.com/todos/?userId={}"
 
-    employee_id = int(sys.argv[1])
-    user_data = requests.get(user_url.format(employee_id)).json()
-    tasks_data = requests.get(todo_url.format(employee_id)).json()
-    completed_task_count = 0
-    total_task_count = 0
-    for task in tasks_data:
-        if task['userId'] == employee_id:
-            total_task_count += 1
-        if task['userId'] == employee_id and task['completed'] is True:
-            completed_task_count += 1
+    id = int(sys.argv[1])
+    response_users = requests.get(users.format(id)).json()
+    response_todos = requests.get(todos.format(id)).json()
+    task_count = 0
+    task_total = 0
+    for task in response_todos:
+        if task['userId'] == id:
+            task_total += 1
+        if task['userId'] == id and task['completed'] is True:
+            task_count += 1
     print("Employee {} is done with tasks({}/{}):".format(
-        user_data['name'], completed_task_count, total_task_count))
-    for task in tasks_data:
-        if task['userId'] == employee_id and task['completed'] is True:
-            print("\t{}".format(task['title']))
+        response_users['name'], task_count, task_total))
+    for lines in response_todos:
+        if lines['userId'] == id and lines['completed'] is True:
+            print("\t {}".format(lines['title']))
