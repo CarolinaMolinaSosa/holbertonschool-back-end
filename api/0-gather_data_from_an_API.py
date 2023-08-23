@@ -14,7 +14,6 @@ if __name__ == "__main__":
     tasks_data = requests.get(todo_url.format(employee_id)).json()
     completed_task_count = 0
     total_task_count = 0
-
     for task in tasks_data:
         if task['userId'] == employee_id:
             total_task_count += 1
