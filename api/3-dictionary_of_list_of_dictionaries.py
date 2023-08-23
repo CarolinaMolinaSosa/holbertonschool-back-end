@@ -16,7 +16,7 @@ if __name__ == "__main__":
         user_id = user['id']
         username = user['username']
         tasks = []
-        
+
         for todo in todos_response:
             if todo['userId'] == user_id:
                 tasks.append({
@@ -24,11 +24,9 @@ if __name__ == "__main__":
                     "task": todo['title'],
                     "completed": todo['completed']
                 })
-        
+
         data_dict[str(user_id)] = tasks
 
     json_file_name = "todo_all_employees.json"
     with open(json_file_name, 'w') as file_json:
         json.dump(data_dict, file_json)
-
-    print(f"Data exported to {json_file_name}")
